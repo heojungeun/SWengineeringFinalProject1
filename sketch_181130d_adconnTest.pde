@@ -49,11 +49,11 @@ void setup() {
   output = createWriter("consoletext.txt");
   
   /////////////////////////////////////////// minim player
-  //minim = new Minim(this);
-  ////player = minim.loadFile("C:\\exc_1.mp3");
+  minim = new Minim(this);
+  
   //lasttimecheck =millis();
   //timeinterval=5000;
-  //player.play();
+  
   ///////////////////////////////////////////
   
   /////////////////////////////////////modify///////////
@@ -90,25 +90,31 @@ void draw() {
       drawHandState(joints[KinectPV2.JointType_HandRight]);
       drawHandState(joints[KinectPV2.JointType_HandLeft]);
       
-      if(exerSt==0){
+      if(exerSt==0)
+      {
+        if(cnt == 49){
+          //voice 1
+          player = minim.loadFile("C:\\exc_1.mp3");
+          player.play();
+        }
+        
         /////////// standard pose--both hand closed
         if(cnt == 50 && joints[KinectPV2.JointType_HandLeft].getState() == KinectPV2.HandState_Closed && 
                      joints[KinectPV2.JointType_HandRight].getState() == KinectPV2.HandState_Closed )
-       {
-         //////
-           if(angle(joints, KinectPV2.JointType_ElbowLeft)>-0.7 && 
-           angle(joints, KinectPV2.JointType_ElbowLeft)< 0.8)
-           {
-             if(stcheck!=-1)exerUpper(joints);
-           }
-           else if(angle(joints, KinectPV2.JointType_ElbowRight)>-0.7 && 
-           angle(joints, KinectPV2.JointType_ElbowRight)< 0.8)
-           {
-             if(stcheck!=-1)exerUpper(joints);
-           }
+         {
+             //////
+             if(angle(joints, KinectPV2.JointType_ElbowLeft)>-0.7 && 
+             angle(joints, KinectPV2.JointType_ElbowLeft)< 0.8)
+             {
+               if(stcheck!=-1)exerUpper(joints);
+             }
+             else if(angle(joints, KinectPV2.JointType_ElbowRight)>-0.7 && 
+             angle(joints, KinectPV2.JointType_ElbowRight)< 0.8)
+             {
+               if(stcheck!=-1)exerUpper(joints);
+             }
            
-       } 
-       
+         } 
       }
       //////error exception timeover
        // if(millis()>lasttimecheck +timeinterval)
@@ -119,13 +125,6 @@ void draw() {
        //}
 
       //////error exception timeover
-     
-     
-      if(cnt == 50 && joints[KinectPV2.JointType_HandLeft].getState() == KinectPV2.HandState_Closed && 
-                     joints[KinectPV2.JointType_HandRight].getState() == KinectPV2.HandState_Closed )
-       {
-         if(stcheck!=-1)exerUpper(joints);
-       }
 
 ////=====================================================test code===========================================
           //if(cnt == 50 && joints[KinectPV2.JointType_HandLeft].getState() == KinectPV2.HandState_Closed && 
@@ -173,7 +172,7 @@ void keyPressed() {
 // 1 m vibe slow : 1 | 2,3m vibe slow: 2 | 2,3m vibe strong: 3
 // 1,4m vibe slow: 4 | 1,4m vibe strong : 5
 void exerUpper(KJoint[] joints){
-  // voice 
+  
   
   int imp=0;int cnt=0,i=0;
   float temp=0.0;
@@ -182,31 +181,37 @@ void exerUpper(KJoint[] joints){
   if(stcheck==0){
     // motor 1 vibe(100), voice
     imp = 1;
-    port.write(imp);
-    //delay(000); // 2sec delay
-    stcheck = stcheck+1;
+    //voice 3,4,5
     
-    // voice : 5
+    if(angle(joints, KinectPV2.JointType_ElbowLeft)>-0.7 && angle(joints, KinectPV2.JointType_ElbowLeft)< 0.8 &&
+    joints[KinectPV2.JointType_HandLeft].getState() == KinectPV2.HandState_Closed && 
+                     joints[KinectPV2.JointType_HandRight].getState() == KinectPV2.HandState_Closed )
+     { 
+        // voice 6
+        
+        port.write(imp);
+        //delay(000); // 2sec delay
+        stcheck = stcheck+1;
+     } 
   }
   
   // 5 loop
   if(stcheck>=1 && stcheck <6){
-    imp = 2; // 2,3 motor slow vib
-    port.write(imp);
+   // imp = 2; // 2,3 motor slow vib
+   // port.write(imp);
     
     //standard form : handstate closed + delay
 
         int test1 = 100;
         
         if(secflag==0){
+          // voice : 7
           println("2, 3 motor vibe 100 : ",test1);
           output.println("2, 3 motor vibe 100 : " + test1);
           port.write(2); //2,3m vibe slow: 2
           //delay(2000);
-        }
-        
-        // 90' ->  2,3 motor strong(200) vibe 3sec
-       if(secflag==0 && angle(joints, KinectPV2.JointType_ElbowLeft)>0.9 && angle(joints, KinectPV2.JointType_ElbowLeft)< 2){
+        }// 90' ->  2,3 motor strong(200) vibe 3sec
+        else if(secflag==0 && angle(joints, KinectPV2.JointType_ElbowLeft)>0.9 && angle(joints, KinectPV2.JointType_ElbowLeft)< 2){
          test1 = 200; 
          println("2, 3 motor vibe 200 : ",test1);
          output.println("2, 3 motor vibe 200 : " + test1);
@@ -217,21 +222,20 @@ void exerUpper(KJoint[] joints){
          //imp = 2036; // 2,3 motor strong(200) vibe 3sec
          //port.write(imp);
 
-        }
-
-          // 1,4 slow vibe   
-        if(secflag==1){
-                   
+        }// 1,4 slow vibe   
+        else if(secflag==1){
+          // voice : 8
          // 1,4 motor vibe 100
           test1 = 100;
           println("1,4 motor vibe 100 : ",test1);
           output.println("1,4 motor vibe 100 : " + test1);
           port.write(4);
           println();
-
-        
+        }
         //1,4 strong vibe  180'
-        if(secflag==1 && angle(joints, KinectPV2.JointType_ElbowLeft)> -0.7 && angle(joints, KinectPV2.JointType_ElbowLeft)< 0.5){
+        else if(secflag==1 && angle(joints, KinectPV2.JointType_ElbowLeft)> -0.7 && 
+        angle(joints, KinectPV2.JointType_ElbowLeft)< 0.5)
+        {
                    
          // 1,4 motor vibe 100
           test1 = 200;
@@ -249,17 +253,22 @@ void exerUpper(KJoint[] joints){
           println();
           
           secflag=0;
-          }
         }
+        // voice : 9
+        
   }// 5 loop if end 
   else if(stcheck == 6){ // loop stop
     output.println("kcal: 9");
     output.println();
+    
+    // voice 10
     println("kcal: 9");
     println();
     stcheck = -1;
     exerSt = 1;
     port.write(0);
+    
+    //voice: 11
   }
   
   if(cnt<50) cnt= cnt+1;
