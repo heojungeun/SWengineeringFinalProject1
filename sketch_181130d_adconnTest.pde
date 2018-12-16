@@ -181,9 +181,9 @@ void exerUpper(KJoint[] joints){
   // start check==0 motor1 vibe
   if(stcheck==0){
     // motor 1 vibe(100), voice
-    imp = 1021;
-    //port.write(imp);
-    //delay(2000); // 2sec delay
+    imp = 1;
+    port.write(imp);
+    //delay(000); // 2sec delay
     stcheck = stcheck+1;
     
     // voice : 5
@@ -191,20 +191,18 @@ void exerUpper(KJoint[] joints){
   
   // 5 loop
   if(stcheck>=1 && stcheck <6){
-    imp = 1006; // 2,3 motor slow vib
-    //port.write(imp);
+    imp = 2; // 2,3 motor slow vib
+    port.write(imp);
     
     //standard form : handstate closed + delay
-
-       //angle(joints, KinectPV2.JointType_ElbowLeft);
-       //angle(joints, KinectPV2.JointType_ShoulderLeft);
 
         int test1 = 100;
         
         if(secflag==0){
           println("2, 3 motor vibe 100 : ",test1);
           output.println("2, 3 motor vibe 100 : " + test1);
-          //port.write(test1);
+          port.write(2); //2,3m vibe slow: 2
+          //delay(2000);
         }
         
         // 90' ->  2,3 motor strong(200) vibe 3sec
@@ -212,9 +210,9 @@ void exerUpper(KJoint[] joints){
          test1 = 200; 
          println("2, 3 motor vibe 200 : ",test1);
          output.println("2, 3 motor vibe 200 : " + test1);
+         port.write(3);  // 2,3 motor strong(200) vibe 3sec
          //delay(2000);   /// 2~3sec delay
          secflag=1;
-         //port.write(test1);
          
          //imp = 2036; // 2,3 motor strong(200) vibe 3sec
          //port.write(imp);
@@ -228,7 +226,7 @@ void exerUpper(KJoint[] joints){
           test1 = 100;
           println("1,4 motor vibe 100 : ",test1);
           output.println("1,4 motor vibe 100 : " + test1);
-
+          port.write(4);
           println();
 
         
@@ -239,12 +237,8 @@ void exerUpper(KJoint[] joints){
           test1 = 200;
           println("1,4 motor vibe 200 : ",test1);
           output.println("1,4 motor vibe 200 : " + test1);
-
           println();
-          imp = 2035; // 1,4 motor strong(200) vibe 3sec
-           //port.write(imp);
-         
-           //port.write(10);
+          port.write(5);
 
           // loop flag++
           stcheck = stcheck + 1;
@@ -265,6 +259,7 @@ void exerUpper(KJoint[] joints){
     println();
     stcheck = -1;
     exerSt = 1;
+    port.write(0);
   }
   
   if(cnt<50) cnt= cnt+1;
