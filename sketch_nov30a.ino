@@ -37,29 +37,35 @@ void loop() {
       analogWrite(led3, 0);
       analogWrite(vib4, 0);
       analogWrite(led4, 0);
+        break;
       case 1:
       analogWrite(vib1, 70);
       analogWrite(led1, 150);
+        break;
       case 2:
       analogWrite(vib2, 70);
       analogWrite(led2, 150);
       analogWrite(vib3, 70);
       analogWrite(led3, 150);
+        break;
       case 3:
       analogWrite(vib2, 120);
       analogWrite(led2, 250);
       analogWrite(vib3, 120);
       analogWrite(led3, 250);
+        break;
       case 4:
       analogWrite(vib1, 70);
       analogWrite(led1, 150);
       analogWrite(vib4, 70);
       analogWrite(led4, 150);
+        break;
       case 5:
       analogWrite(vib1, 120);
       analogWrite(led1, 250);
       analogWrite(vib4, 120);
       analogWrite(led4, 250);
+        break;
     }
   }
 }
