@@ -11,14 +11,14 @@ void setup()
   // initialize the serial communication:
   Serial.begin(9600);
   // initialize the ledPin as an output:
-  pinMode(3, OUTPUT);
-  pinMode(4, OUTPUT);//잘안됨
-  pinMode(5, OUTPUT);
-  pinMode(6, OUTPUT);//잘됨
-  pinMode(9, OUTPUT);
-  pinMode(10, OUTPUT);//잘됨
-  pinMode(11, OUTPUT);
-  pinMode(12, OUTPUT);//잘안됨
+  pinMode(vib1, OUTPUT);
+  pinMode(led1, OUTPUT);//잘안됨
+  pinMode(vib2, OUTPUT);
+  pinMode(led2, OUTPUT);//잘됨
+  pinMode(vib3, OUTPUT);
+  pinMode(led3, OUTPUT);//잘됨
+  pinMode(vib4, OUTPUT);
+  pinMode(led4, OUTPUT);//잘안됨
 }
 
 void loop() {
