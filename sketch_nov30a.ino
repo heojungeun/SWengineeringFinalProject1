@@ -11,24 +11,24 @@ void setup()
   // initialize the serial communication:
   Serial.begin(9600);
   // initialize the ledPin as an output:
-  pinMode(vib1, OUTPUT);
-  pinMode(led1, OUTPUT);//잘안됨
-  pinMode(vib2, OUTPUT);
-  pinMode(led2, OUTPUT);//잘됨
-  pinMode(vib3, OUTPUT);
-  pinMode(led3, OUTPUT);//잘됨
-  pinMode(vib4, OUTPUT);
-  pinMode(led4, OUTPUT);//잘안됨
+  pinMode(3, OUTPUT);
+  pinMode(4, OUTPUT);//잘안됨
+  pinMode(5, OUTPUT);
+  pinMode(6, OUTPUT);//잘됨
+  pinMode(9, OUTPUT);
+  pinMode(10, OUTPUT);//잘됨
+  pinMode(11, OUTPUT);
+  pinMode(12, OUTPUT);//잘안됨
 }
 
 void loop() {
-  byte flag;
+  int flag;
 
   if(Serial.available()>0) {
     flag = Serial.read();
+
     
-    switch(flag){
-      case 0:
+   // if(flag ==0){
       analogWrite(vib1, 0);
       analogWrite(led1, 0);
       analogWrite(vib2, 0);
@@ -37,35 +37,33 @@ void loop() {
       analogWrite(led3, 0);
       analogWrite(vib4, 0);
       analogWrite(led4, 0);
-        break;
-      case 1:
+    //}
+    if(flag == 1){
       analogWrite(vib1, 70);
       analogWrite(led1, 150);
-        break;
-      case 2:
+    }
+    else if(flag == 2){
       analogWrite(vib2, 70);
       analogWrite(led2, 150);
       analogWrite(vib3, 70);
       analogWrite(led3, 150);
-        break;
-      case 3:
+    }
+    else if(flag ==3){
       analogWrite(vib2, 120);
       analogWrite(led2, 250);
       analogWrite(vib3, 120);
       analogWrite(led3, 250);
-        break;
-      case 4:
-      analogWrite(vib1, 70);
-      analogWrite(led1, 150);
+    }
+    else if(flag==4){
+
       analogWrite(vib4, 70);
       analogWrite(led4, 150);
-        break;
-      case 5:
-      analogWrite(vib1, 120);
-      analogWrite(led1, 250);
+    }
+    else if(flag==5){
+
       analogWrite(vib4, 120);
       analogWrite(led4, 250);
-        break;
+      
     }
   }
 }
