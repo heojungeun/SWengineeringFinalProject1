@@ -28,6 +28,15 @@ void loop() {
     flag = Serial.read();
     
     switch(flag){
+      case 0:
+      analogWrite(vib1, 0);
+      analogWrite(led1, 0);
+      analogWrite(vib2, 0);
+      analogWrite(led2, 0);
+      analogWrite(vib3, 0);
+      analogWrite(led3, 0);
+      analogWrite(vib4, 0);
+      analogWrite(led4, 0);
       case 1:
       analogWrite(vib1, 70);
       analogWrite(led1, 150);
