@@ -39,30 +39,30 @@ void loop() {
       analogWrite(led4, 0);
     //}
     if(flag == 1){
-      analogWrite(vib1, 70);
-      analogWrite(led1, 150);
+      analogWrite(vib1, 100);
+      analogWrite(led1, 100);
     }
     else if(flag == 2){
-      analogWrite(vib2, 70);
-      analogWrite(led2, 150);
-      analogWrite(vib3, 70);
-      analogWrite(led3, 150);
+      analogWrite(vib2, 150);
+      analogWrite(led2, 200);
+      analogWrite(vib3, 150);
+      analogWrite(led3, 200);
     }
     else if(flag ==3){
-      analogWrite(vib2, 120);
-      analogWrite(led2, 250);
-      analogWrite(vib3, 120);
-      analogWrite(led3, 250);
+      analogWrite(vib2, 0);
+      analogWrite(led2, 0);
+      analogWrite(vib3, 0);
+      analogWrite(led3, 0);
     }
     else if(flag==4){
 
-      analogWrite(vib4, 70);
-      analogWrite(led4, 150);
+      analogWrite(vib4, 150);
+      analogWrite(led4, 200);
     }
     else if(flag==5){
 
-      analogWrite(vib4, 120);
-      analogWrite(led4, 250);
+      analogWrite(vib4, 0);
+      analogWrite(led4, 0);
       
     }
   }
